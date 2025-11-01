@@ -1,0 +1,18 @@
+pipeline:
+  agent any
+  stages:
+    - stage('Checkout'):
+        steps:
+          - checkout scm
+    - stage('Build and Test'):
+        steps:
+          - script:
+              sh 'mvn clean install'
+          - script:
+              sh 'mvn test'
+    - stage('Publish Test Results'):
+        steps:
+          - junit '**/target/surefire-reports/*.xml'
+  post:
+    always:
+      - cleanWs()
