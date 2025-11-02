@@ -1,0 +1,51 @@
+
+
+  
+  
+    org.seleniumhq.selenium
+    selenium-java
+    4.11.0
+  
+
+  
+  
+    io.cucumber
+    cucumber-java
+    8.11.0
+  
+  
+    io.cucumber
+    cucumber-junit-platform-engine
+    8.11.0
+  
+
+  
+  
+    org.junit.jupiter
+    junit-jupiter
+    5.10.0
+    test
+  
+
+  
+  
+    io.github.bonigarcia
+    webdrivermanager
+    5.4.1
+  
+
+  
+  
+    io.qameta.allure
+    allure-junit5
+    2.21.0
+  
+
+
+
+  
+    
+     ... surefire config ... 
+    
+    
+  
