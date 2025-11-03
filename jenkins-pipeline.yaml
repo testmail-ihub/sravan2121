@@ -1,0 +1,38 @@
+pipeline {
+    agent any
+
+    triggers {
+        // Trigger on pull request creation or update
+        pullRequest {
+            // GitHub webhook must be configured to send PR events
+            // This will run the pipeline for any PR targeting any branch
+        }
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('Build and Test') {
+            steps {
+                // Use Maven to clean, compile, and run tests
+                sh 'mvn clean test'
+            }
+        }
+    }
+
+    post {
+        always {
+            // Archive test results for visibility in Jenkins UI
+            junit '**/target/surefire-reports/*.xml'
+        }
+        success {
+            echo 'Build and tests succeeded.'
+        }
+        failure {
+            echo 'Build or tests failed.'
+        }
+    }
+}
