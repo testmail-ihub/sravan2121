@@ -1,0 +1,28 @@
+pipeline:
+  agent:
+    any
+  triggers:
+    - githubPullRequest:
+        branches:
+          include:
+            - feature/AzureLLMTEst
+  stages:
+    - stage: Checkout
+      steps:
+        - checkout scm
+    - stage: Set up Java & Maven
+      steps:
+        - sh 'echo Setting up Java and Maven environment'
+        - sh 'mvn --version'
+    - stage: Build & Test
+      steps:
+        - sh 'mvn clean test'
+    - stage: Post Actions
+      steps:
+        - junit '**/target/surefire-reports/*.xml'
+        - sh 'echo Build and test completed'
+  post:
+    always:
+      - sh 'echo Pipeline finished'
+    failure:
+      - sh 'echo Build or tests failed'
